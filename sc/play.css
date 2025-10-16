@@ -1,0 +1,89 @@
+body {
+	background-color:#000;
+	color:#FFF;
+}
+
+.scene,
+#speechbox,
+#reactbar,
+#clock {display:none}
+
+.scene[data-active],
+#speechbox[data-active],
+#speechbox[data-hint],
+#reactbar[data-active],
+#clock[data-active] {display:block}
+
+#scene_start, #scene_pic {
+	text-align:center;
+}
+
+.textbutton, .imgbutton {
+	cursor:pointer;
+}
+.textbutton:hover {
+	text-shadow:#F00 0px 10px 10px;
+}
+.textbutton:active {
+	text-shadow:#F83 0px 10px 10px;
+}
+.imgbutton:hover {
+	filter:drop-shadow(1px 1px 0px #F00);
+}
+.imgbutton:active {
+	filter:drop-shadow(1px 1px 0px #F83);
+}
+
+#version {
+	font-size:0.8rem;
+}
+
+#speechbox, .react {
+	background-color:#000000C0;
+}
+#speechbox:hover, .react:hover {
+	background-color:#402000C0;
+}
+#speechbox:active, .react:active {
+	background-color:#603000C0;
+}
+
+#img_main {
+	max-width:96vw;
+	max-height:96vh;
+}
+
+#speechbox {
+	position:absolute;
+	top:10%;
+	left:10%;
+	width:80%;
+	height:10%;
+	align-content:center;
+}
+
+#clock {
+	position:absolute;
+	top:30%;
+	left:10%;
+	align-content:center;
+	background-color:#000000C0;
+}
+
+#reactbar {
+	position:absolute;
+	top:80%;
+	right:10%;
+	align-content:end;
+}
+
+.react {
+	display:inline-block;
+	min-width:100px;
+	min-height:35px;
+	align-content:center;
+	margin-left:100px;
+	border:solid #506;
+}
+
+#scene_settings>p:nth-of-type(2) {display:none}
