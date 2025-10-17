@@ -1,4 +1,5 @@
 body {
+	overflow:hidden;
 	background-color:#000;
 	color:#FFF;
 }
@@ -6,13 +7,15 @@ body {
 .scene,
 #speechbox,
 #reactbar,
-#clock {display:none}
+#clock,
+#img_main[data-hide] {display:none}
 
 .scene[data-active],
 #speechbox[data-active],
 #speechbox[data-hint],
 #reactbar[data-active],
-#clock[data-active] {display:block}
+#clock[data-active],
+#img_main {display:block}
 
 #scene_start, #scene_pic {
 	text-align:center;
@@ -27,15 +30,14 @@ body {
 .textbutton:active {
 	text-shadow:#F83 0px 10px 10px;
 }
+.imgbutton {
+	width:2.5em;
+}
 .imgbutton:hover {
 	filter:drop-shadow(1px 1px 0px #F00);
 }
 .imgbutton:active {
 	filter:drop-shadow(1px 1px 0px #F83);
-}
-
-#version {
-	font-size:0.8rem;
 }
 
 #speechbox, .react {
@@ -48,9 +50,14 @@ body {
 	background-color:#603000C0;
 }
 
+#version {
+	font-size:0.5em;
+}
+
 #img_main {
-	max-width:96vw;
-	max-height:96vh;
+	width:100vw;
+	height:100vh;
+	object-fit:contain;
 }
 
 #speechbox {
@@ -72,18 +79,50 @@ body {
 
 #reactbar {
 	position:absolute;
-	top:80%;
-	right:10%;
+	bottom:10%;
 	align-content:end;
 }
 
+#reactbar[data-align=hrz],
+#reactbar[data-align=right] {
+	right:10%;
+}
+
+#reactbar[data-align=left] {
+	left:10%;
+}
+
 .react {
-	display:inline-block;
 	min-width:100px;
 	min-height:35px;
 	align-content:center;
-	margin-left:100px;
 	border:solid #506;
+}
+
+#reactbar[data-align=hrz] .react {
+	display:inline-block;
+	margin-left:100px;
+}
+
+#reactbar[data-align=left] .react,
+#reactbar[data-align=right] .react {
+	display:block;
+	margin-top:30px;
+}
+
+@media (pointer:coarse) {
+	body {
+		font-size:2.5em;
+	}
+
+	input {
+		font-size:inherit;
+	}
+	
+	.react {
+		min-width:300px;
+		min-height:105px;
+	}
 }
 
 #scene_settings>p:nth-of-type(2) {display:none}

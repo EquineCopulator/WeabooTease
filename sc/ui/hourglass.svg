@@ -2,6 +2,7 @@
 	<path style="stroke:#BBB;stroke-width:2;fill:none;" d="
 		M30 20h40
 		M30 80h40
-		M40 20C40,30 40,40 50,50C60,60 60,60 60,80
-		M60 20C60,30 60,40 50,50C40,60 40,60 40,80"/>
+		M30 20C30,30 30,40 50,50C70,60 70,60 70,80
+		M70 20C70,30 70,40 50,50C30,60 30,60 30,80"/>
+	<rect x="33" y="63" width="34.5" height="17" style="stroke:none;fill:#BBB"/>
 </svg>

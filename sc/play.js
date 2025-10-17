@@ -33,6 +33,7 @@
 		
 		scene_pic:document.getElementById('scene_pic'),
 		img_main:document.getElementById('img_main'),
+		img_gallery:document.getElementById('img_gallery'),
 		speechbox:document.getElementById('speechbox'),
 		speechline:document.getElementById('speechline'),
 		clock:document.getElementById('clock'),
@@ -44,44 +45,41 @@
 		b_back_settings:document.getElementById('b_back_settings'),
 		b_save_settings:document.getElementById('b_save_settings'),
 		b_reset:document.getElementById('b_reset'),
-		rd_lang:{
-			['en']:document.getElementById('radio_lang_en'),
-			['zh']:document.getElementById('radio_lang_zh'),
-			['ja']:document.getElementById('radio_lang_ja'),
-		},
 		input_day_limit:document.getElementById('day_limit'),
 		
 		scene_credits:document.getElementById('scene_credits'),
 		b_back_credits:document.getElementById('b_back_credits'),
 		
 		_clean() {
-			this.speechbox.removeAttribute('data-hint');
 			this.reactbar.removeAttribute('data-active');
 			this.reactbar.textContent = '';
+			this.speechbox.removeAttribute('data-hint');
 		},
 		
 		_restore_pref() {
+			document.querySelector(`input[type=radio][name=lang][value=${this.pref.lang}]`).checked = true;
 			this.input_day_limit.value = this.pref.day_limit;
-			this.rd_lang[this.pref.lang].checked = true;
+			document.querySelector(`input[type=radio][name=react][value=${this.pref.react_pos}]`).checked = true;
 		},
 		
 		init(game_script) {
 			{
-				let lang = localStorage.getItem('PREF_LANG');
-				if (!lang)
-					lang = navigator.language.match('.+?(?=\-|$)')[0];
-				if (!(lang in this.rd_lang))
-					lang = 'en';
-				this.pref.lang = lang;
+				let lang = localStorage.getItem('PREF_LANG')
+					?? navigator.language.match('.+?(?=\-|$)')[0];
+				this.pref.lang =
+					document.querySelector(`input[type=radio][name=lang][value=${lang}]`) ? lang : 'en';
 			}
 			this.pref.day_limit = parseInt(localStorage.getItem('PREF_DAY_LIMIT') ?? 10);
+			this.pref.react_pos = localStorage.getItem('PREF_REACT_POS') ?? 'hrz';
+			this.img_main.decoding = 'sync';
 			this._restore_pref();
 			
 			const body = this;
 			this.b_start.onclick = function() {
+				body.img_main.src = R.IMG.MAIN;
+				body.reactbar.setAttribute('data-align', body.pref.react_pos);
 				body.scene_start.removeAttribute('data-active');
 				body.scene_pic.setAttribute('data-active', '');
-				body.img_main.src = R.IMG.MAIN;
 				game_script(body).then(function() {
 					body.scene_pic.removeAttribute('data-active');
 					body.scene_start.setAttribute('data-active', '');
@@ -101,9 +99,7 @@
 				body.scene_start.setAttribute('data-active', '');
 				
 				{
-					const v = Object.entries(body.rd_lang).find(function(rd) {
-						return rd[1].checked;
-					})[0];
+					const v = document.querySelector('input[type=radio][name=lang]:checked')?.value ?? 'en';
 					if (body.pref.lang != v) {
 						body.pref.lang = v;
 						localStorage.setItem('PREF_LANG', v);
@@ -114,6 +110,13 @@
 					if (body.pref.day_limit != v) {
 						body.pref.day_limit = v;
 						localStorage.setItem('PREF_DAY_LIMIT', v);
+					}
+				}
+				{
+					const v = document.querySelector('input[type=radio][name=react]:checked')?.value ?? 'hrz';
+					if (body.pref.react_pos != v) {
+						body.pref.react_pos = v;
+						localStorage.setItem('PREF_REACT_POS', v);
 					}
 				}
 			};
@@ -230,13 +233,13 @@
 		},
 		
 		ask_react(reacts, timeout, hint, timehint) {		
-			let timer = undefined;
+			let timer_hint = undefined;
 			if (hint) {
 				this.speechbox.setAttribute('data-hint', '');
 				this.speechline.textContent = hint;
 				if (timehint > 0 && (!(timeout > 0) || timeout > timehint)) {
 					const body = this;
-					timer = setTimeout(function() {
+					timer_hint = setTimeout(function() {
 						body.speechbox.removeAttribute('data-hint');
 					}, timehint);
 				}
@@ -244,22 +247,24 @@
 			
 			const body = this;
 			return new Promise(function(resolve, reject) {
-				for (const i of reacts.keys()) {
-					const str = reacts[i];
+				let timer = undefined;
+				if (timeout > 0) timer = setTimeout(function() {
+					body._clean();
+					clearTimeout(timer_hint);
+					resolve(-1);
+				}, timeout);
+				for (const[i, str] of reacts.entries()) {
 					const r = document.createElement("div");
 					r.className = "react";
 					r.textContent = str;
 					r.onclick = function() {
-						clearTimeout(timer);
 						body._clean();
+						clearTimeout(timer);
+						clearTimeout(timer_hint);
 						setTimeout(function() { resolve(i); });
 					}
 					body.reactbar.appendChild(r);
 				}
-				if (timeout > 0) setTimeout(function() {
-					body._clean();
-					resolve(-1);
-				}, timeout);
 				body.reactbar.setAttribute('data-active', '');
 			});
 		},
@@ -286,7 +291,7 @@
 		if (len < 0 || len > 0xFF) return reset_game();
 		
 		let day = Math.floor((Date.now() - start) / LEN_DAY);
-		const skip = day - parseInt(localStorage.getItem('LAST_LOGIN') ?? day) - 1;
+		const skip = day - parseInt(localStorage.getItem('LAST_LOGIN') ?? day - 1) - 1;
 		
 		if (skip > 0) {
 			day -= skip;
@@ -296,7 +301,7 @@
 		return [day, len, skip];
 	}
 	
-	body.init(async function(body) {
+	body.init(async function(body) { try {
 		const STR = R.STR[body.pref.lang];
 	
 		let [day, len, skip] = new_day();
@@ -409,7 +414,7 @@
 				const diff = rate - parseFloat(localStorage.getItem('GR_RUSH') ?? 2);
 				localStorage.setItem('GR_RUSH', rate);
 				if (diff > 1.5) gameresult = 2;
-				else if (diff > 0.5) gameresult = 1;
+				else if (diff > -0.5) gameresult = 1;
 			} break;
 			case 1: /*MEM*/ {
 				await body.show_lines(linebreak(STR.SP_G_MEM));
@@ -460,7 +465,7 @@
 				const diff = rate - parseFloat(localStorage.getItem('GR_MEM') ?? 0);
 				localStorage.setItem('GR_MEM', rate);
 				if (diff < -0.12) gameresult = 2;
-				else if (diff < -0.04) gameresult = 1;
+				else if (diff < 0.04) gameresult = 1;
 				else if (n == 0) gameresult = 1;
 			} break;
 			case 2: /*SPEED*/ {
@@ -471,6 +476,7 @@
 				const len_t = 2 + rand(3);
 				let error = 0;
 				for (let i = 0; i < len_t; ++i) {
+					if (i > 0) mt = body.play_metronome(inte);
 					const timeout = 30 + rand(91);
 					for (;;) {
 						switch (await body.ask_react([
@@ -512,8 +518,6 @@
 					
 					await body.show_lines([STR.L_G_SPEED_ERR.replace('%1', `${err}`)]);
 					error += err;
-					
-					if (i < len_t) mt = body.play_metronome(inte);
 				}
 				body.stop_gallery(gt);
 				
@@ -521,7 +525,7 @@
 				const diff = rate - parseFloat(localStorage.getItem('GR_SPEED') ?? 0) ;
 				localStorage.setItem('GR_SPEED', rate);
 				if (diff < -3) gameresult = 2;
-				else if (diff < -0.5) gameresult = 1;
+				else if (diff < 0.5) gameresult = 1;
 				else if (error == 0) gameresult = 1;
 			} break;
 			case 3: /* BP */ {
@@ -600,7 +604,7 @@
 				const diff = rate - parseFloat(localStorage.getItem('GR_BP') ?? 1);
 				localStorage.setItem('GR_BP', rate);
 				if (diff > 0.6) gameresult = 2;
-				else if (diff > 0.2) gameresult = 1;
+				else if (diff > -0.2) gameresult = 1;
 			} break;
 			/*case 4: {
 				//wanting new ideas
@@ -643,5 +647,7 @@
 		
 		await body.show_lines(linebreak(STR.SP_DAY.replace('%1', `${(3 + rand(8)) * 5}`)));
 		localStorage.setItem('LAST_LOGIN', day);
+		
+	} catch (e) { alert(e); }
 	});
 })();

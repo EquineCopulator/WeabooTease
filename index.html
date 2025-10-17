@@ -1,9 +1,10 @@
 <!DOCTYPE html><html><head>
+	<meta charset="UTF-8"/>
 	<link href="sc/play.css" rel="stylesheet"/>
 	<title>Weaboo Tease</title>
 </head><body>
 	<div id="scene_start" class="scene">
-		<h1>Weaboo Tease <span id="version">v0.1</span></h1>
+		<h1>Weaboo Tease <span id="version">v0.2</span></h1>
 		<p id="b_start" class="textbutton">Start</p>
 		<p id="b_settings" class="textbutton">Settings</p>
 		<p id="b_credits" class="textbutton">Credits</p>
@@ -14,30 +15,39 @@
 			<div id="speechline"></div>
 		</div>
 		<div id="clock">
-			<img src="sc/ui/hourglass.svg" width="40em"/>
+			<img src="sc/ui/hourglass.svg" width="100em"/>
 			<div id="clock_time"></div>
 		</div>
 		<div id="reactbar"></div>
 	</div>
 	<div id="scene_settings" class="scene">
-		<img id="b_back_settings" src="sc/ui/back.svg" alt="Back" width="50em" class="imgbutton"/>
+		<img id="b_back_settings" src="sc/ui/back.svg" alt="Back" class="imgbutton"/>
 		<p id="b_reset" class="textbutton">Reset user data</p>
 		<p>
 			<span>Language: </span>
-			<input type="radio" id="radio_lang_en" name="language" value="en" checked/>
-			<label for="radio_lang_en" lang="en">English</label>
-			<input type="radio" id="radio_lang_zh" name="language" value="zh"/>
-			<label for="radio_lang_zh" lang="zh">中文</label>
-			<input type="radio" id="radio_lang_ja" name="language" value="ja"/>
-			<label for="radio_lang_ja" lang="ja">日本語</label>
+			<input type="radio" id="rad_lang_en" name="lang" value="en" checked/>
+			<label for="rad_lang_en" lang="en">English</label>
+			<input type="radio" id="rad_lang_zh" name="lang" value="zh"/>
+			<label for="rad_lang_zh" lang="zh">中文</label>
+			<input type="radio" id="rad_lang_ja" name="lang" value="ja"/>
+			<label for="rad_lang_ja" lang="ja">日本語</label>
 		</p>
 		<p>
 			<label for="day_limit">Days upper limit:</label>
 			<input type="number" id="day_limit" min="1" max="99"/>
 		</p>
+		<p>
+			<span>Buttons position: </span>
+			<input type="radio" id="rad_react_hrz" name="react" value="hrz" checked/>
+			<label for="rad_react_hrz">Bottom</label>
+			<input type="radio" id="rad_react_left" name="react" value="left"/>
+			<label for="rad_react_left">Left</label>
+			<input type="radio" id="rad_react_right" name="react" value="right"/>
+			<label for="rad_react_right">Right</label>
+		</p>
 	</div>
 	<div id="scene_credits" class="scene">
-		<img id="b_back_credits" src="sc/ui/back.svg" alt="Back" width="50em" class="imgbutton"/>
+		<img id="b_back_credits" src="sc/ui/back.svg" alt="Back" class="imgbutton"/>
 		<p>Script by <a href="https://github.com/EquineCopulator">EquineCopulator</a></p>
 		<p>Images by <a href="https://www.pixiv.net/en/users/106397497" lang="ja">流され星@AI生成</a></p>
 	</div>
