@@ -52,6 +52,7 @@ body {
 
 #version {
 	font-size:0.5em;
+	margin-left:1em;
 }
 
 #img_main {
@@ -124,5 +125,3 @@ body {
 		min-height:105px;
 	}
 }
-
-#scene_settings>p:nth-of-type(2) {display:none}

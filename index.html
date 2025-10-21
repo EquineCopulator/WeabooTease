@@ -4,9 +4,9 @@
 	<title>Weaboo Tease</title>
 </head><body>
 	<div id="scene_start" class="scene">
-		<h1>Weaboo Tease <span id="version">v0.2</span></h1>
-		<p id="b_start" class="textbutton">Start</p>
-		<p id="b_settings" class="textbutton">Settings</p>
+		<h1><span class="ui-tr">Weaboo Tease</span><span id="version">v0.3</span></h1>
+		<p id="b_start" class="textbutton ui-tr">Start</p>
+		<p id="b_settings" class="textbutton ui-tr">Settings</p>
 		<p id="b_credits" class="textbutton">Credits</p>
 	</div>
 	<div id="scene_pic" class="scene">
@@ -22,9 +22,9 @@
 	</div>
 	<div id="scene_settings" class="scene">
 		<img id="b_back_settings" src="sc/ui/back.svg" alt="Back" class="imgbutton"/>
-		<p id="b_reset" class="textbutton">Reset user data</p>
+		<p id="b_reset" class="textbutton ui-tr">Reset user data</p>
 		<p>
-			<span>Language: </span>
+			<span class="ui-tr">Language: </span>
 			<input type="radio" id="rad_lang_en" name="lang" value="en" checked/>
 			<label for="rad_lang_en" lang="en">English</label>
 			<input type="radio" id="rad_lang_zh" name="lang" value="zh"/>
@@ -33,25 +33,28 @@
 			<label for="rad_lang_ja" lang="ja">日本語</label>
 		</p>
 		<p>
-			<label for="day_limit">Days upper limit:</label>
+			<label for="day_limit" class="ui-tr">Days upper limit:</label>
 			<input type="number" id="day_limit" min="1" max="99"/>
 		</p>
 		<p>
-			<span>Buttons position: </span>
+			<span class="ui-tr">Buttons position: </span>
 			<input type="radio" id="rad_react_hrz" name="react" value="hrz" checked/>
-			<label for="rad_react_hrz">Bottom</label>
+			<label for="rad_react_hrz" class="ui-tr">Bottom</label>
 			<input type="radio" id="rad_react_left" name="react" value="left"/>
-			<label for="rad_react_left">Left</label>
+			<label for="rad_react_left" class="ui-tr">Left</label>
 			<input type="radio" id="rad_react_right" name="react" value="right"/>
-			<label for="rad_react_right">Right</label>
+			<label for="rad_react_right" class="ui-tr">Right</label>
 		</p>
 	</div>
 	<div id="scene_credits" class="scene">
 		<img id="b_back_credits" src="sc/ui/back.svg" alt="Back" class="imgbutton"/>
 		<p>Script by <a href="https://github.com/EquineCopulator">EquineCopulator</a></p>
-		<p>Images by <a href="https://www.pixiv.net/en/users/106397497" lang="ja">流され星@AI生成</a></p>
+		<p>Images by <a href="https://www.pixiv.net/users/106397497" lang="ja">流され星@AI生成</a></p>
 	</div>
 	<script src="sc/res.js"></script>
+	<script src="sc/res_zh.js"></script>
+	<script src="sc/res_ja.js"></script>
 	<script src="sc/res_img.js"></script>
 	<script src="sc/play.js"></script>
+	<script src="sc/game.js"></script>
 </body></html>

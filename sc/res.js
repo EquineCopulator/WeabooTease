@@ -9,15 +9,24 @@ Object.defineProperty(globalThis, "R", {
 	}
 });
 
+R.STR['en'].A_YES = `Yes`;
+R.STR['en'].A_NO = `No`;
+R.STR['en'].A_EDGE = `Edge`;
+R.STR['en'].A_RESUME = `Resume`;
+R.STR['en'].A_CUM = `Cum`;
+R.STR['en'].A_START = `Start`;
+R.STR['en'].A_FASTER = `Faster`;
+R.STR['en'].A_SLOWER = `Slower`;
+
 /* single line */
-R.STR['en'].L_LEN_ADD = `(Cum permission is postponed for 1 day.)`;
-R.STR['en'].L_LEN_SUB = `(Cum permission is expedited for 1 day.)`;
+R.STR['en'].L_LEN_ADD = `(Evil spirit's control is extended for 1 day.)`;
+R.STR['en'].L_LEN_SUB = `(Evil spirit's control is shortened for 1 day.)`;
 
 R.STR['en'].L_MORE = `Still wanting to play more games? *grin*`;
 
 R.STR['en'].L_G_RUSH_KEEP = `Keep stroking until you edge!`;
-R.STR['en'].L_G_RUSH_COUNT = `One edge. Don't stroke until you resume!`;
-R.STR['en'].L_G_RUSH_NOGO = `Too fast, doesn't count! Don't stroke until you resume!`;
+R.STR['en'].L_G_RUSH_COUNT = `One edge.`;
+R.STR['en'].L_G_RUSH_NOGO = `Too fast, doesn't count!`;
 
 R.STR['en'].L_G_RUSH_RESULT = `The number of edges you scored is %1.`;
 
@@ -76,9 +85,8 @@ R.STR['en'].LL_FIRST_END = [
 	`That's enough.`,
 ];
 R.STR['en'].LL_BET = [
-	`So are you going to beg for a release today?`,
-	`So do you think you should cum today?`,
-	`So, request for the release today?`,
+	`It is Heroes! So are you going to release today?`,
+	`It is Heroes! So do you think you should cum today?`,
 ];
 R.STR['en'].LL_BET_YES = [
 	`Well, well, well...`,
@@ -111,10 +119,13 @@ R.STR['en'].LL_GAME_BAD = [
 /* Multiple lines */
 R.STR['en'].SP_WELCOME = `
 Welcome to Weaboo Tease!
-You are taken prisoner!
-From now on you must obey me
-until I let you cum!
-Understand?`;
+Girls here are possessed by evil spirits!
+They will try to extort from you your Seminal Energy!
+To save the girls, do not surrender your cum! 
+But obey them otherwise!
+Wait patiently until our Heroes awakens,
+and then give them your cum to save the world!
+Oh, no... I am falling into possession too...!`;
 
 R.STR['en'].SP_COMEBACK = `Welcome back!`;
 
@@ -130,22 +141,19 @@ You skipped %1 days!
 To punish you, I am postponing your cumming for an equal time!`;
 
 R.STR['en'].SP_CUM_OK = `
-Congrats!
-You've worked hard enough
-that I decide to give you a cum!
-Now stroke and cum as you like!`;
+The Heros long for your Seminal Energy!
+Give them a nice cum!`;
 
 R.STR['en'].SP_CUM_NOGO = `
-Boo!
-You did not perform well enough to earn a cum!
-As a penalty for your naïve cock,
-I will make you suffer longer!`;
+It's a trap!
+The Heros are still brainwashed!
+The evil spirit's control deepened!`;
 
 R.STR['en'].SP_FINISH = `
 Nice to see you finally have your cum!
 Does it feel good?
-Your slavery has ended, for now!
-But whenever you want this feeling again...
+The world and the girls are saved, for now!
+But whenever you feel something wrong again...
 Come back to me and I will bring you once more to this hell!
 I know you will, masochist.
 Won't you? *twinkle*`;
@@ -160,13 +168,6 @@ Go!`;
 R.STR['en'].SP_G_MEM = `
 Pay more attentions to these girls I will show!
 Edge to everyone who appeared twice or more!
-Ready?
-Go!`;
-
-R.STR['en'].SP_G_SPEED = `
-From now on keeping stroking!
-You can only rest after each edge!
-But Edge only when girls in the pics are not dicked!
 Ready?
 Go!`;
 

@@ -8,4 +8,4 @@ However, this github repository does not contain binary files, that is, images a
 
 - Put images in `/img` folder.
 - Modify image lists in `sc/res_img.js` accordingly.
-- To make sense, `R.IMG.V` images should depict penetrations while `R.IMG.H` images should not.
+- To make sense, `R.IMG.V` images should depict penetrations and `R.IMG.H` images should not.
